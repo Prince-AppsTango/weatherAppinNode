@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather</title>
+  </head>
+  <body>
+    <div style="align-items: center; display: flex; flex-direction: column">
+      <h1>{%location%}, {%country%}</h1>
+      <p id="date">WED | OCT 23 | 12:42PM</p>
+      <h1>{%tempt%}&deg C</h1>
+      <p>Min {%temptmin%} &deg C | Max {%temptmax%} &deg C</p>
+    </div>
+
+    <script>
+      const curdate = document.getElementById("date");
+      const getCureentTime = () => {
+        var myDate = new Date();
+
+        let daysList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        let monthsList = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Aug",
+          "Oct",
+          "Nov",
+          "Dec",
+        ];
+
+        let date = myDate.getDate();
+        let month = monthsList[myDate.getMonth()];
+        let year = myDate.getFullYear();
+        let day = daysList[myDate.getDay()];
+
+        let today = ` ${day} | ${month} ${date}`;
+
+        let amOrPm;
+        let twelveHours = function () {
+          if (myDate.getHours() > 12) {
+            amOrPm = "PM";
+            let twentyFourHourTime = myDate.getHours();
+            let conversion = twentyFourHourTime - 12;
+            return `${conversion}`;
+          } else {
+            amOrPm = "AM";
+            return `${myDate.getHours()}`;
+          }
+        };
+        let hours = twelveHours();
+        let minutes = myDate.getMinutes();
+
+        let currentTime = `${hours}:${minutes} ${amOrPm}`;
+
+        let currentData = today + " | " + currentTime;
+        return currentData;
+      };
+      curdate.innerHTML = getCureentTime();
+    </script>
+  </body>
+</html>
